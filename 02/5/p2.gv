@@ -1,0 +1,58 @@
+digraph G {
+ {
+  node []
+  "-"
+  "!"
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "="
+  "<"
+  ">"
+  "<="
+  ">="
+  "<>"
+  "&"
+  "|"
+  i
+  v
+  s
+  "("
+ }
+ {
+  node [shape = circle, fixedsize = 20]
+  UO
+  BO
+  E
+  "E'"
+  C
+  L
+  P
+  "P'"
+  Ph
+ }
+ {
+  node [shape = egg]
+  REM
+  GOTO
+  LET
+  PRINT
+  INPUT
+  IF
+  RUN
+  LIST
+  END
+ }
+
+ UO -> "-"; UO -> "!";
+ BO -> "+"; BO -> "-"; BO -> "*"; BO -> "/"; BO -> "%"; BO -> "="; BO -> "<"; BO -> ">"; BO -> "<="; BO -> ">="; BO -> "<>"; BO -> "&"; BO -> "|";
+ E -> i; E -> v; E -> s; E -> UO; E -> "(";
+ "E'" -> BO;
+ C -> REM; C -> GOTO; C -> LET; C -> PRINT; C -> INPUT; C -> IF;
+ L -> i;
+ P -> L;
+ "P'" -> L;
+ Ph -> L; Ph -> RUN; Ph -> LIST; Ph -> END;
+}
