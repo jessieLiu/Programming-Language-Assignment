@@ -137,9 +137,9 @@ M(y) &= integer -12 \\
 M(4) &= integer 4 \\
 M(2 * x) &= (integer 2) int* (integer 6) = integer 12 \\
 M(3 / y) &= (integer 3) int/ (integer -12) = integer 0 \\
-M(2 * x + 3 / y) &= (integer 12) int+ (integer 0) = integer 11 \\
-M(2 * x + 3 / y - 4) &= (integer 11) - (integer 4) = integer 7 \\
-M(z = 2 * x + 3 / y - 4) &= state \{<x,6>,<y,-12>,<z,7>\}
+M(2 * x + 3 / y) &= (integer 12) int+ (integer 0) = integer 12 \\
+M(2 * x + 3 / y - 4) &= (integer 12) - (integer 4) = integer 8 \\
+M(z = 2 * x + 3 / y - 4) &= state \{<x,6>,<y,-12>,<z,8>\}
 \end{align*}
 
 \end{document}
