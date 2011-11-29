@@ -1,0 +1,53 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{asymptote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Programming Language: Assignment 4}
+\rhead{Sui Qingyu (5090309011)}
+\cfoot{\thepage}
+
+\setlength\parskip{0.5em}
+
+\lstset{numbers=left,
+        numberstyle=\scriptsize,
+        frame=lines,
+        flexiblecolumns=false,
+        language=C,
+        basicstyle=\ttfamily\small,
+        breaklines=true,
+        extendedchars=true,
+        escapechar=\%,
+        texcl=true,
+        showstringspaces=true,
+        keywordstyle=\bfseries,
+        tabsize=4}
+
+\begin{document}
+\section*{Problem 1}
+\textbf{Q:} \textit{Consider the following sequence of C/C++ statements. Which of them are syntactically valid but have no reasonable semantic interpretation (assuming the i and j have been declared as int variables)? And explain why.}
+
+\begin{lstlisting}
+j = 0;
+i = 3 / j;
+for (i = 1; i > -1; i++)
+    i--;
+int func(int num) {
+    if (num == 0) return 1;
+    else return func(num - 1); }
+\end{lstlisting}
+
+In line 2, it doesn't have a reasonable interpretation, because integer cannot be divided by 0 in semantic.
+
+In line 4 and 5, there is an infinite loop.
+
+\section*{Problem 3}
+\textbf{Q:} \textit{Define, in any programming languages, a function f, such that the evaluation of the expression (a + f(b)) * (C + (f(b))) when performed from left-to-right has a result differs from that obtained by evaluation right-to-left.}
+\end{document}
