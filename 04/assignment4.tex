@@ -80,7 +80,7 @@ void main() {
 
 The answer is shown in Table \ref{t:tracetable}.
 
-\begin{table}[hp]
+\begin{table}[htbp]
 \centering
 \begin{tabular}{ccccc}
 \toprule
@@ -114,9 +114,32 @@ Step & Statement & i & a & z \\
 \end{table}
 
 \section*{Problem 7}
-
 \textbf{Q:} \textit{Suppose $state_1 = \{<x, 1>, <y, 2>, <z, 3>\}$, $state_2 = \{<y, 5>\}$, and $state_3 = \{<w, 1>\}$. What are the results of the following operations?}
 
-\textbf{a.} \textit{$state_1 \otimes state_2$}
+\textbf{a.} $state_1\ \overline{\cup}\ state_2 = \{<x, 1>, <y, 5>, <z, 3>\}$
+
+\textbf{b.} $state_1\ \overline{\cup}\ state_3 = \{<x, 1>, <y, 2>, <z, 3>, <w, 1>\}$
+
+\textbf{c.} $\O\ \overline{\cup}\ state_2 = \{<y, 5>\}$
+
+\textbf{d.} $state_2\ \otimes\ state_3 = \O$
+
+\textbf{e.} $(state_1 - (state_1\ \otimes\ state_3))\ \overline{\cup}\ state_3 = \{<x, 1>, <y, 2>, <z, 3>, <w, 1>\}$
+
+\section*{Problem 8}
+\textbf{Q:} \textit{Show all steps in the derivations of the meaning of the following assignment statement when execute in the given state, using the semantic rules given in Section 8.2.3: $M(z=2*x+3/y-4,\{<x,6>,<y,-12>,<z,75>\})$}
+
+\begin{align*}
+M(2) &= integer 2 \\
+M(x) &= integer 6 \\
+M(3) &= integer 3 \\
+M(y) &= integer -12 \\
+M(4) &= integer 4 \\
+M(2 * x) &= (integer 2) int* (integer 6) = integer 12 \\
+M(3 / y) &= (integer 3) int/ (integer -12) = integer 0 \\
+M(2 * x + 3 / y) &= (integer 12) int+ (integer 0) = integer 11 \\
+M(2 * x + 3 / y - 4) &= (integer 11) - (integer 4) = integer 7 \\
+M(z = 2 * x + 3 / y - 4) &= state \{<x,6>,<y,-12>,<z,7>\}
+\end{align*}
 
 \end{document}
