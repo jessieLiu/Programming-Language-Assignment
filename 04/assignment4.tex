@@ -46,8 +46,77 @@ int func(int num) {
 
 In line 2, it doesn't have a reasonable interpretation, because integer cannot be divided by 0 in semantic.
 
-In line 4 and 5, there is an infinite loop.
+In line 3 and 4, there is an infinite loop. There's not a final state, as variable \textit{i} flips between 0 and 1.
+
+In line 5 to 7, there will be an infinite loop if variable \textit{num} is less than 0.
 
 \section*{Problem 3}
-\textbf{Q:} \textit{Define, in any programming languages, a function f, such that the evaluation of the expression (a + f(b)) * (C + (f(b))) when performed from left-to-right has a result differs from that obtained by evaluation right-to-left.}
+\textbf{Q:} \textit{Define, in any programming languages, a function f, such that the evaluation of the expression (a + f(b)) * (c + (f(b))) when performed from left-to-right has a result differs from that obtained by evaluation right-to-left.}
+
+In most language supports ``++'' operator, like C and C++, f(b) = b++ is an example that l2r differs from r2l evaluation.
+
+\section*{Problem 4}
+\textbf{Q:} \textit{Consider the expression x + y / 2 in the language C. How many different meanings does this expression have, depending on the types of x and y?}
+
+When y is an integer (int, short, etc.), this sentence means x plus the integer part of the result x divided by y.
+
+When y is an float number (float, double, etc.), it means the exact result of equation ``x + y / 2''.
+
+\section*{Problem 6}
+\textbf{Q:} \textit{Using Table 7.3 (on text book, page 162) as a guide, write a trace table for the Clite program:}
+
+\begin{lstlisting}
+void main() {
+    int i, a, z;
+    i = 5;
+    a = 2;
+    z = 1;
+    while(i>0) {
+        if(i –i/2*2 == 1)
+            z = z * a;
+        i = i /2;
+        a = a * a; } }
+\end{lstlisting}
+
+The answer is shown in Table \ref{t:tracetable}.
+
+\begin{table}[hp]
+\centering
+\begin{tabular}{ccccc}
+\toprule
+ & Before & \multicolumn{3}{c}{Variables} \\
+\cline{3-5}
+Step & Statement & i & a & z \\
+\midrule
+1 & 3 & undef & undef & undef \\
+2 & 4 & 5 & undef & undef \\
+3 & 5 & 5 & 2 & undef \\
+4 & 6 & 5 & 2 & 1 \\
+5 & 7 & 5 & 2 & 1 \\
+6 & 8 & 5 & 2 & 1 \\
+7 & 9 & 5 & 2 & 2 \\
+8 & 10 & 2 & 2 & 2 \\
+9 & 6 & 2 & 4 & 2 \\
+10 & 7 & 2 & 4 & 2 \\
+11 & 9 & 2 & 4 & 2 \\
+12 & 10 & 1 & 4 & 2 \\
+13 & 6 & 1 & 16 & 2 \\
+14 & 7 & 1 & 16 & 2 \\
+15 & 8 & 1 & 16 & 2 \\
+16 & 9 & 1 & 16 & 32 \\
+17 & 10 & 0 & 16 & 32 \\
+18 & 6 & 0 & 256 & 32 \\
+19 & 10 & 0 & 256 & 32 \\
+\bottomrule
+\end{tabular}
+\caption{Trace table for the Clite program in Problem 6}
+\label{t:tracetable}
+\end{table}
+
+\section*{Problem 7}
+
+\textbf{Q:} \textit{Suppose $state_1 = \{<x, 1>, <y, 2>, <z, 3>\}$, $state_2 = \{<y, 5>\}$, and $state_3 = \{<w, 1>\}$. What are the results of the following operations?}
+
+\textbf{a.} \textit{$state_1 \otimes state_2$}
+
 \end{document}
