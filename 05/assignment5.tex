@@ -1,0 +1,174 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{asymptote}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Programming Language: Assignment 4}
+\rhead{Sui Qingyu (5090309011)}
+\cfoot{\thepage}
+
+\setlength\parskip{0.5em}
+
+\lstset{numbers=left,
+        numberstyle=\scriptsize,
+        frame=lines,
+        flexiblecolumns=false,
+        language=C,
+        basicstyle=\ttfamily\small,
+        breaklines=true,
+        extendedchars=true,
+        escapechar=\%,
+        texcl=true,
+        showstringspaces=false,
+        keywordstyle=\bfseries,
+        tabsize=4}
+
+\begin{document}
+\section*{Problem 1}
+\textbf{Q:} \textit{For the following Clite program, (a) What is the value of the parameter n in topmost stack activation record each time the function Fibonacci calls? (b) How many stack activation records are activated for the call Fibonacci(13)?}
+
+\begin{lstlisting}
+int Fibonacci (int n) {
+    if (n < 2) return n;
+    else return Fibonacci(n-1) + Fibonacci(n-2);
+}
+int main () {
+    int answer;
+    answer = Fibonacci(8);
+}
+\end{lstlisting}
+
+(a) Here are the values of n in turn: 8, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 1, 0, 3, 2, 1, 0, 1, 4, 3, 2, 1, 0, 1, 2, 1, 0, 5, 4, 3, 2, 1, 0, 1, 2, 1, 0, 3, 2, 1, 0, 1, 6, 5, 4, 3, 2, 1, 0, 1, 2, 1, 0, 3, 2, 1, 0, 3, 2, 1, 0, 1, 4, 3, 2, 1, 0, 1, 2, 1, 0.
+
+(b) 753 statck activation records are activated.
+
+\section*{Problem 2}
+\textbf{Q:} \textit{The following C/C++ program solves the Towers of Hanoi problem for three disks. Draw the Run-Time Stack after each call and return of MoveTower function.}
+
+\begin{lstlisting}
+void MoveTower(int disks, char start, char end, char temp)
+{
+    if(disks ==1)
+        cout<<"Move a disk from "<<start<<" to "<<end<<endl;
+    else{
+        MoveTower(disks-1,start,temp,end);
+        cout<<"Move a disk from "<<start<<" to "<<end<<endl;
+        MoveTower(disks-1,temp,end,start);
+    }
+}
+int main(int argc, char* argv[]) {
+    int totalDisks = 3;
+    MoveTower(totalDisks,'A', 'B', 'C');
+    return 0;}
+\end{lstlisting}
+
+The answer is on the appendix paper.
+
+\section*{Problem 4}
+\textbf{Q:} \textit{Run the following Clite program, and draw the Abstract Syntax Sketch (like Figure 10.4) for this program.}
+
+\begin{lstlisting}
+int rem (int x, int y){
+    return x - x/y * y;
+}
+int gcd (int x, int y){
+    int z;
+    if (y == 0) return x;
+    else if (x == 0) return y;
+    else {
+        z = rem(x, y);
+        return gcd(y, z);}}
+int main () {
+    int answer;
+    answer = gcd(24,10);}
+\end{lstlisting}
+
+The answer is on the appendix paper.
+
+\section*{Problem 5}
+\textbf{Q:} \textit{Write down type map $tm_G$, $tm_F$ and $tm_f$ for the following program, where f can be either main, A, B or C.}
+
+\begin{lstlisting}
+int h, i, j, k;
+void C(int m, int l, int n){
+    h = m + l + n;}
+void B(int w) {
+    int j, k;
+    i = 2*w;
+    w = w + 1;
+    C(i, j, w);}
+void A(int x, int y) {
+    bool i, j;
+    B(h);}
+int main () {
+    int a, b;
+    h = 5; a = 3; b = 2; k = 12;
+    A(a, b);}
+\end{lstlisting}
+
+\begin{align*}
+tm_G = &\{\langle h, int\rangle , \langle i, int\rangle , \langle j, int\rangle , \langle k, int\rangle \} \\
+tm_F = &\{\langle C, void, \{\langle m, int\rangle , \langle l, int\rangle , \langle n, int\rangle \}\rangle , \langle B, void, \{\langle w, int\rangle \}\rangle , \\
+       &\langle A, void, \{\langle x, int\rangle , \langle y, int\rangle \}\rangle \} \\
+tm_C = &(tm_G \cup tm_F) \overline{\cup} \{\langle m, int\rangle , \langle l, int\rangle , \langle n, int\rangle \} \\
+     = &\{\langle h, int\rangle , \langle i, int\rangle , \langle j, int\rangle , \langle k, int\rangle , \langle m, int\rangle , \langle l, int\rangle , \langle n, int\rangle , \\
+       &\langle C, void, \{\langle m, int\rangle , \langle l, int\rangle , \langle n, int\rangle \}\rangle , \\
+       &\langle B, void, \{\langle w, int\rangle \}\rangle , \\
+       &\langle A, void, \{\langle x, int\rangle , \langle y, int\rangle \}\rangle \} \\
+tm_B = &(tm_G \cup tm_F) \overline{\cup} \{\langle w, int\rangle \} \\
+     = &\{\langle h, int\rangle , \langle i, int\rangle , \langle j, int\rangle , \langle k, int\rangle , \langle w, int\rangle , \\
+       &\langle C, void, \{\langle m, int\rangle , \langle l, int\rangle , \langle n, int\rangle \}\rangle , \\
+       &\langle B, void, \{\langle w, int\rangle \}\rangle , \\
+       &\langle A, void, \{\langle x, int\rangle , \langle y, int\rangle \}\rangle \} \\
+tm_A = &(tm_G \cup tm_F) \overline{\cup} \{\langle x, int\rangle , \langle y, int\rangle \} \\
+     = &\{\langle h, int\rangle , \langle i, int\rangle , \langle j, int\rangle , \langle k, int\rangle , \langle x, int\rangle , \langle y, int\rangle , \\
+       &\langle C, void, \{\langle m, int\rangle , \langle l, int\rangle , \langle n, int\rangle \}\rangle , \\
+       &\langle B, void, \{\langle w, int\rangle \}\rangle , \\
+       &\langle A, void, \{\langle x, int\rangle , \langle y, int\rangle \}\rangle \} \\
+\end{align*}
+
+\section*{Problem 6}
+\textbf{Q:} \textit{Using the example Clite functions defined in Figures 10.1 and 10.5, construct three different calls; each call should violate one of the Type Rules 10.6, 10.7, and 10.8, but not the other two.}
+
+\begin{lstlisting}
+int answer;
+string wrong_answer;
+
+\\ This violate Type Rule 10.6
+fibonacci(8);
+
+\\ This violate Type Rule 10.7
+answer = fibonacci(8, 9, 10);
+
+\\ This violate Type Rule 10.8
+wrong_answer = fibonacci(8);
+\end{lstlisting}
+
+\section*{Problem 7}
+\textit{Oh I think it a little hard for me...}
+
+\section*{Problem 8}
+\textbf{Q:} \textit{Read the following Perl program, get it to run, and explain why some of addresses printed are identical.}
+
+\begin{lstlisting}
+#!/usr/local/bin/perl
+Use strict;
+Use warnings;
+my @array;
+for(0..9){
+    my $tmp = 123;
+    my $addr = \$tmp;
+    Print “$_ has address: $addr\n”;
+    $array[$_/2] = $addr;
+}
+\end{lstlisting}
+
+Because the value of ``\$\_/2'' is 0, 0, 1, 1, 2, 2..., line 9 will not apply for new memory in one of two times. So in these time (2nd, 4th, 6th, 8th and 10th) of the loop, the value of \$addr will not change. Otherwise, the value of \$addr will change because of the memory for it before has been used.
+\end{document}
